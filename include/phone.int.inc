@@ -97,9 +97,9 @@ function format_int_phone_number($phonenumber, $field = array()) {
   if (isset($bits[1])) {
     // This is the first non-CC segment, so it could have the NDN.
     switch ($bits[1][0]) {
-      case 0:
-        $bits[1] = substr($bits[1], 1);
-        break;
+//      case 0:
+//        $bits[1] = substr($bits[1], 1);
+//        break;
     }
     switch ($bits[1]) {
       case 0:
