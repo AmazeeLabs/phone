@@ -27,13 +27,22 @@ function valid_sg_phone_number($phonenumber) {
         +6561234567  / +6581234567  / +6591234567
         +65 61234567 / +65 81234567 / +65 91234567
         61234567     / 81234567     / 91234567
+        +65 6123 4567
   */
 
-  $regex = '/^(\+65)?\s?[689]\d{7}$/i';
+  $patterns = array(
+    '/^(\+65)?\s?[689]\d{7}$/i',
+    '/^(\+65)?\s?[689]\d{3}\s?\d{4}$/i',
+  );
 
 
   // return true if valid, false otherwise
-  return (bool) preg_match($regex, $phonenumber);
+  foreach ($patterns as $pattern) {
+    if (preg_match($pattern, $phonenumber)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
 }
 
 /**

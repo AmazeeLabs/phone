@@ -23,10 +23,20 @@ function valid_cn_phone_number($phonenumber) {
   $phonenumber = trim($phonenumber);
 
   // define regular expression
-  $regex = '/^(\+86|86)?( |-)?([0-9]{11}|([0-9]{3,4}(\-|\.| )[0-9]{3,8})|[0-9]{2}( |\-)[0-9]{4}[ ][0-9]{4}|[0-9]{2}\.[0-9]{2}\.[0-9]{2}\.[0-9]{2}\.[0-9]{2})$/';
+  $patterns = array(
+    '/^(\+86|86)?( |-)?([0-9]{11}|([0-9]{3,4}(\-|\.| )[0-9]{3,8})|[0-9]{2}( |\-)[0-9]{4}[ ][0-9]{4}|[0-9]{2}\.[0-9]{2}\.[0-9]{2}\.[0-9]{2}\.[0-9]{2})$/',
+    '/^\+86\s?\d{6}\s?\d{4}$/',
+    '/^\+86\s?\d{3}\s?\d{4}\s?\d{4}$/',
+    '/^\+86\s?\d{2}\s?\d{2}\s?\d{3}\s?\d{3}$/',
+  );
 
   // return true if valid, false otherwise
-  return (bool) preg_match($regex, $phonenumber);
+  foreach ($patterns as $pattern) {
+    if (preg_match($pattern, $phonenumber)) {
+      return TRUE;
+    }
+  }
+  return FALSE;
 }
 
 /**
